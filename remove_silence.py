@@ -113,7 +113,7 @@ def _get_duration(in_filename):
 
 def remove_silence(
         in_filename,
-        tempdir = '.out',
+        tempdir='.out',
         temp_segments_pattern='chunk_{:04d}.mp4',
         silence_threshold=DEFAULT_THRESHOLD,
         silence_duration=DEFAULT_DURATION,
@@ -161,7 +161,7 @@ def remove_silence(
 
     _logged_popen(
         (ffmpeg
-         .input('list.txt', format='concat', safe=0)
+         .input('.list.txt', format='concat', safe=0)
          .output(output_filename, c='copy')
          .overwrite_output()
          .compile()),
