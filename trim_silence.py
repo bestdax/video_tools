@@ -111,7 +111,7 @@ def _get_duration(in_filename):
     return float(ffmpeg.probe(in_filename)['format']['duration'])
 
 
-def remove_silence(
+def trim_silence(
         in_filename,
         tempdir='.out',
         temp_segments_pattern='chunk_{:04d}.mp4',
@@ -181,5 +181,5 @@ if __name__ == '__main__':
         logger.setLevel(logging.DEBUG)
 
     start = time.time()
-    remove_silence(**kwargs)
+    trim_silence(**kwargs)
     print(f'running time: {time.time() - start:.2f}s')
