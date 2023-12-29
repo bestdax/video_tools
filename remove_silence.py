@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import unicode_literals
 
 import argparse
@@ -153,7 +153,8 @@ def remove_silence(
             stderr=subprocess.PIPE if not verbose else None,
         ).communicate()
 
-    with open('.list.txt', 'w') as f:
+    temp_list_txt = '.list.txt'
+    with open(temp_list_txt, 'w') as f:
         f.write('\n'.join(concat_files))
 
     in_filename_splits = os.path.splitext(in_filename)
@@ -161,7 +162,7 @@ def remove_silence(
 
     _logged_popen(
         (ffmpeg
-         .input('.list.txt', format='concat', safe=0)
+         .input(temp_list_txt, format='concat', safe=0)
          .output(output_filename, c='copy')
          .overwrite_output()
          .compile()),
@@ -169,8 +170,8 @@ def remove_silence(
         stderr=subprocess.PIPE if not verbose else None
     ).communicate()
 
-    subprocess.run('rm -fr .out', shell=True)
-    subprocess.run('rm .list.txt', shell=True)
+    subprocess.run(f'rm -fr "{tempdir}"', shell=True)
+    subprocess.run(f'rm "{temp_list_txt}"', shell=True)
 
 
 if __name__ == '__main__':
