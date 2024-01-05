@@ -93,7 +93,7 @@ def get_chunk_times(in_filename, silence_threshold, silence_duration, start_time
         chunk_ends.append(end_time or 10000000.)
 
     chunks = list(zip(chunk_starts, chunk_ends))
-    chunks = [(start, end) for (start, end) in chunks if start < end]
+    chunks = [(start, end) for (start, end) in chunks if start < end and end - start > 0.1]
 
     return chunks
 
