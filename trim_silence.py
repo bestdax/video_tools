@@ -113,7 +113,7 @@ def _get_duration(in_filename):
 
 def trim_silence(
         in_filename,
-        tempdir='.out',
+        tempdir='.temp',
         temp_segments_pattern='chunk_{:04d}.mp4',
         silence_threshold=DEFAULT_THRESHOLD,
         silence_duration=DEFAULT_DURATION,
